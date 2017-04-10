@@ -1,0 +1,22 @@
+{
+  "name": "nodeproject",
+  "version": "1.0.0",
+  "description": "node express project",
+  "main": "app/app.js",
+  "scripts": {
+    "start": "node app/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jijoraju/nodeproject.git"
+  },
+  "author": "Jijo Raju",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jijoraju/nodeproject/issues"
+  },
+  "homepage": "https://github.com/jijoraju/nodeproject#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
