@@ -4,35 +4,41 @@ var router = express.Router();
 
 
 router.get('/speakers', function(req, res){
-    
-    var info = '';
-    var dataFile = req.app.get('appData');
-    dataFile.speakers.forEach(function(item){
-       
-       info += `
-            <li>
-                <h2>  ${item.name} </h2>
-                <p>   ${item.summary} </p>
-            </li>
-       `;
+
+    var data = req.app.get('appData');
+    var photos = [];
+    var pageData = data.speakers;
+    data.speakers.forEach(function(item){
+        photos = photos.concat(item.artwork);
     });
     
-    res.send(`
-        <h1> Just Started my server </h1>
-        ${info}
-        <script src='/reload/reload.js'></script>
-    `);
+    res.render('speakers', {
+        pageTitle : 'Jijo Created',
+        artwork: photos,
+        dataPage: pageData,
+        pageId : 'speakers'
+    });      
+
 });
 
 router.get('/speakers/:speakerid', function(req, res){
+    var data = req.app.get('appData');
+    var photos = [];
+    var pageData = [];
     
-    var dataFile = req.app.get('appData');
-    var speaker = dataFile.speakers[req.params.speakerid];
-    res.send(`
-        <h1> ${speaker.name} </h1>
-        <p> ${speaker.summary} </p>
-        <script src='/reload/reload.js'></script>
-    `);
+    data.speakers.forEach(function(item) {
+    if (item.shortname == req.params.speakerid) {
+      pageData.push(item);
+      photos = photos.concat(item.artwork);
+    }
+    });
+    
+    res.render('speakers', {
+        pageTitle : 'Jijo Created',
+        artwork: photos,
+        dataPage: pageData,
+        pageId : 'speakers'
+    });
 });
 
 module.exports = router;

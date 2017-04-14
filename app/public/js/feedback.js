@@ -1,16 +1,16 @@
 $(function() {
   $.getJSON('api', updateFeedback);
-
-  $('.feedback-form').submit(function(e) {
+  
+  $('.feedback-form').submit(function(e){
     e.preventDefault();
     $.post('api', {
-      name: $('#feedback-form-name').val(),
-      title: $('#feedback-form-title').val(),
-      message: $('#feedback-form-message').val()
+        name : $('#feedback-form-name').val(),
+        title : $('#feedback-form-title').val(),
+        message : $('#feedback-form-message').val()
     }, updateFeedback);
   });
-
-  $('.feedback-messages').on('click', function(e) {
+  
+ $('.feedback-messages').on('click', function(e) {
       if (e.target.className == 'glyphicon glyphicon-remove') {
         $.ajax({
           url: 'api/' + e.target.id,
@@ -18,8 +18,8 @@ $(function() {
           success: updateFeedback
         }); //ajax
       } // the target is a delete button
-  }); //feedback messages
-
+  }); //fee
+  
   function updateFeedback(data) {
    var output = '';
    $.each(data,function(key, item) {

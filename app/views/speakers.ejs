@@ -4,15 +4,14 @@
   <body id="<%= pageId %>">
 
     <% include partials/template/header.ejs %>
-    <% include partials/content/speakerslist.ejs %>
+
     <div class="container">
       <div class="row">
         <div class="col-sm-8">
-          <% include partials/content/main-content.ejs %>
+          <% include partials/content/speakerslist.ejs %>
         </div><!-- primary -->
         
         <aside class="col-sm-4">
-          <% include partials/content/sidebar-1.ejs %>
           <% include partials/content/sidebar-2.ejs %>
         </aside><!-- secondary -->
       </div>

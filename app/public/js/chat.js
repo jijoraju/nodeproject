@@ -1,37 +1,42 @@
-var socket = io();
-var chatUsername = document.querySelector('#chat-username');
-var chatMessage = document.querySelector('#chat-message');
+var sock = io();
+var userName = document.querySelector('#chat-username');
+var message = document.querySelector('#chat-message');
 
-socket.on('connect', function() {
+sock.on('connect', function(){
   var chatForm = document.forms.chatForm;
 
-  if (chatForm) {
-    chatForm.addEventListener('submit', function(e) {
+  if(chatForm){
+    
+    
+    chatForm.addEventListener('submit', function(e){
       e.preventDefault();
-      socket.emit('postMessage',{
-        username: chatUsername.value,
-        message: chatMessage.value,
+      sock.emit('postMessage', {
+        username : userName.value,
+        message : message.value
       });
-      chatMessage.value='';
-      chatMessage.focus();
-    }); //chatform event
-
-    socket.on('updateMessages', function(data) {
-      showMessage(data);
-    }); //updateMessages
-  } //chatform
-}); //socket
-
-function showMessage(data) {
-  var chatDisplay = document.querySelector('.chat-display');
-  var newMessage = document.createElement('p');
-
-  if (chatUsername.value == data.username) {
-    newMessage.className = 'bg-success chat-text';
-  } else {
-    newMessage.className = 'bg-info text-warning chat-text';
+      message.value = '';
+      message.focus();
+    });
+    sock.on('updateMessages', function(data){
+      showMessages(data);
+    });
   }
 
-  newMessage.innerHTML = '<strong>' + data.username + '</strong>: ' + data.message;
-  chatDisplay.insertBefore(newMessage, chatDisplay.firstChild);
+});
+
+
+function showMessages(data){
+  var chatDisplay = document.querySelector('.chat-display');
+  var newElement = document.createElement('p');
+  
+  if(userName.value == data.username){
+    newElement.className = 'bg-success chat-text';
+  }
+  else{
+    newElement.className = 'bg-warning chat-text';
+  }
+  
+  
+  newElement.innerHTML = '<strong>' + data.username +'</strong> :' + data.message;
+  chatDisplay.insertBefore(newElement, chatDisplay.firstChild);
 }
